@@ -1,26 +1,38 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, FlatList, Image, Pressable} from 'react-native';
+import React from 'react';
+import {ActivityIndicator, Button, FlatList, Text, View} from 'react-native';
+import useCompanyListController from '../../viewController/useCompanyListController';
+import {CompanyListItem} from './component/companyListItem';
 import {styles} from './styles';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import axios from 'axios';
-import {getCompaniesUrl} from '../../../config';
 
-export const CompaniesListScreen = ({
-  navigation,
-}: NativeStackScreenProps<any>) => {
+export const CompaniesListScreen = () => {
+  const {loading, companies, handleItemPress, error, signOut} =
+    useCompanyListController();
+
+  if (loading) {
+    return (
+      <View style={styles.loaderContainer}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text>${error}</Text>
+      </View>
+    );
+  }
   return (
     <View style={styles.container}>
-      <Text
-        style={
-          styles.text
-        }>{`To get the list of companies, you need to do a GET request to the endpoint ${getCompaniesUrl}`}</Text>
-      <Text style={styles.text}>
-        Once you have the list of companies, you need to display them.
-      </Text>
-      <Text style={styles.text}>
-        Each item in the list should be a Pressable that navigates to the
-        CompanyDetails screen
-      </Text>
+      <FlatList
+        data={companies}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => (
+          <CompanyListItem item={item} onPress={() => handleItemPress(item)} />
+        )}
+      />
+      <Button onPress={signOut} title="Signout" />
     </View>
   );
 };

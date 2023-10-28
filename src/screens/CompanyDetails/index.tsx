@@ -1,31 +1,60 @@
-/* eslint-disable quotes */
-import React, {useEffect, useState} from 'react';
-import {View, Text, Image} from 'react-native';
-import {styles} from './styles';
+import {useQuery} from '@apollo/client';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import request from 'graphql-request';
-import {getCompanyDocument, graphqlEndpoint} from '../../../config';
+import React from 'react';
+import {ActivityIndicator, Image, Text, View} from 'react-native';
+import {GET_COMAPNAY} from '../../api/queries';
+import {styles} from './styles';
 
 export const CompanyDetailsScreen = ({
-  navigation,
   route: {params},
 }: NativeStackScreenProps<any>) => {
+  const {loading, error, data} = useQuery(GET_COMAPNAY, {
+    variables: {id: params},
+  });
+
+  if (loading) {
+    return (
+      <View style={styles.loaderContainer}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text>${error.message}</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <Text>{`To get the company details, you need to do a graphQL request to the endpoint ${graphqlEndpoint}, with the header:`}</Text>
-      <Text
-        style={
-          styles.boldText
-        }>{`'x-api-key': 'the-api-token-you-got-earlier'`}</Text>
-      <Text>and the document:</Text>
-      <Text>{getCompanyDocument}</Text>
-      <Text>
-        Along with the company's ID you pressed from the previous screen passed
-        as a variable
+      <Image
+        source={{uri: data.getCompany.coverImageUrl}}
+        style={styles.coverImage}
+      />
+      <Image source={{uri: data.getCompany.logoUrl}} style={styles.logo} />
+      <Text style={styles.companyName}>{data.getCompany.name}</Text>
+      <Text style={styles.companyDescription}>
+        {data.getCompany.description}
       </Text>
-      <Text>
-        You can use the package graphql-request for this, or any other package
-        you choose.
+      <Text style={styles.investmentInfo}>
+        Investment Raised: {data.getCompany.investmentRaised} / Investment
+        Sought: {data.getCompany.investmentSought}
+      </Text>
+      <Text style={styles.investmentInfo}>
+        Number of Investors: {data.getCompany.numberOfInvestors} / Percentage
+        Raised: {data.getCompany.percentageRaised}%
+      </Text>
+      <Text style={styles.locationInfo}>
+        Location: {data.getCompany.city}, {data.getCompany.country}
+      </Text>
+      <Text style={styles.endDate}>
+        Campaign Ends: {data.getCompany.endDate}
+      </Text>
+      <Text style={styles.valuation}>
+        Valuation: {data.getCompany.valuation}
       </Text>
     </View>
   );
