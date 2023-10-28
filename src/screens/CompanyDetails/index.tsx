@@ -1,16 +1,17 @@
-import {useQuery} from '@apollo/client';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
 import {ActivityIndicator, Image, Text, View} from 'react-native';
-import {GET_COMAPNAY} from '../../api/queries';
+import useCompanyDataController from '../../viewController/useCompanyDataController';
 import {styles} from './styles';
 
 export const CompanyDetailsScreen = ({
   route: {params},
 }: NativeStackScreenProps<any>) => {
-  const {loading, error, data} = useQuery(GET_COMAPNAY, {
+  /*const {loading, error, data} = useQuery(GET_COMAPNAY, {
     variables: {id: params},
-  });
+  });*/
+
+  const {loading, errorData, companyData} = useCompanyDataController(params);
 
   if (loading) {
     return (
@@ -20,10 +21,10 @@ export const CompanyDetailsScreen = ({
     );
   }
 
-  if (error) {
+  if (errorData) {
     return (
       <View style={styles.container}>
-        <Text>${error.message}</Text>
+        <Text>${errorData}</Text>
       </View>
     );
   }
@@ -31,31 +32,25 @@ export const CompanyDetailsScreen = ({
   return (
     <View style={styles.container}>
       <Image
-        source={{uri: data.getCompany.coverImageUrl}}
+        source={{uri: companyData?.coverImageUrl}}
         style={styles.coverImage}
       />
-      <Image source={{uri: data.getCompany.logoUrl}} style={styles.logo} />
-      <Text style={styles.companyName}>{data.getCompany.name}</Text>
-      <Text style={styles.companyDescription}>
-        {data.getCompany.description}
+      <Image source={{uri: companyData?.logoUrl}} style={styles.logo} />
+      <Text style={styles.companyName}>{companyData?.name}</Text>
+      <Text style={styles.companyDescription}>{companyData?.description}</Text>
+      <Text style={styles.investmentInfo}>
+        Investment Raised: {companyData?.investmentRaised} / Investment Sought:{' '}
+        {companyData?.investmentSought}
       </Text>
       <Text style={styles.investmentInfo}>
-        Investment Raised: {data.getCompany.investmentRaised} / Investment
-        Sought: {data.getCompany.investmentSought}
-      </Text>
-      <Text style={styles.investmentInfo}>
-        Number of Investors: {data.getCompany.numberOfInvestors} / Percentage
-        Raised: {data.getCompany.percentageRaised}%
+        Number of Investors: {companyData?.numberOfInvestors} / Percentage
+        Raised: {companyData?.percentageRaised}%
       </Text>
       <Text style={styles.locationInfo}>
-        Location: {data.getCompany.city}, {data.getCompany.country}
+        Location: {companyData?.city}, {companyData?.country}
       </Text>
-      <Text style={styles.endDate}>
-        Campaign Ends: {data.getCompany.endDate}
-      </Text>
-      <Text style={styles.valuation}>
-        Valuation: {data.getCompany.valuation}
-      </Text>
+      <Text style={styles.endDate}>Campaign Ends: {companyData?.endDate}</Text>
+      <Text style={styles.valuation}>Valuation: {companyData?.valuation}</Text>
     </View>
   );
 };

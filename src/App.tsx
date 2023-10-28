@@ -32,8 +32,8 @@ const AppWrapper = () => {
         if (token) {
           dispatch(login(token));
         }
-      } catch (error) {
-        console.error('Error checking authentication:', error);
+      } catch (error: Error) {
+        console.error('Error checking authentication:', error.message);
       }
     };
 

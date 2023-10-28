@@ -3,14 +3,14 @@ export interface CompanyDetails {
 }
 
 export interface Data {
-  getCompany: CompanyData;
+  getCompany: GetCompany;
 }
 
-export interface CompanyData {
+export interface GetCompany {
   id: string;
   name: string;
   description: string;
-  coverImageUrl: string;
+  coverImageUrl: string = '';
   logoUrl: string;
   investmentRaised: number;
   investmentSought: number;
@@ -20,7 +20,6 @@ export interface CompanyData {
   valuation: number;
   country: string;
   city: string;
-  updates: Updates;
 }
 
 export interface Updates {

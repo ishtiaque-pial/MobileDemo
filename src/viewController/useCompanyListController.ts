@@ -19,13 +19,10 @@ const useCompanyListController = () => {
   }, [dispatch]);
 
   const handleItemPress = async (item: Company) => {
-    console.log('hhgjhg', 'hgjhjgjh');
-    removeData('token');
     navigation.navigate('CompanyDetails', item.id);
   };
 
   const signOut = async () => {
-    console.log('hhgjhg', 'hgjhjgjh');
     await removeData('token');
     dispatch(logout());
     navigation.reset({
