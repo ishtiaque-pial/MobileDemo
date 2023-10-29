@@ -1,11 +1,12 @@
 import React from 'react';
-import {ActivityIndicator, Button, TextInput, View} from 'react-native';
+import {ActivityIndicator, Button, Text, TextInput, View} from 'react-native';
 import useLoginController from '../../viewController/useLoginController';
 
 import {styles} from './styles';
 
 export const SignInScreen = () => {
-  const {loading, signIn, credentials, setCredentials} = useLoginController();
+  const {loading, signIn, credentials, setCredentials, errorState} =
+    useLoginController();
 
   if (loading) {
     return (
@@ -23,6 +24,7 @@ export const SignInScreen = () => {
         value={credentials.email}
         onChangeText={text => setCredentials({...credentials, email: text})}
       />
+      <Text style={{color: 'red'}}>{errorState.emailError}</Text>
       <TextInput
         style={styles.input}
         placeholder="Password"
