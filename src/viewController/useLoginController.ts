@@ -9,10 +9,7 @@ const useLoginController = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch<any>();
   const {loading, token} = useSelector(selectAuth);
-  const [errorState, setErrorState] = useState({
-    emailError: '',
-    passwordError: '',
-  });
+  const [errorState, setErrorState] = useState('');
 
   const schema = Yup.object().shape({
     email: Yup.string()
@@ -47,11 +44,7 @@ const useLoginController = () => {
       dispatch(loginAsync(credentials));
     } catch (errors: any) {
       errors.inner.forEach((error: any) => {
-        if (error.path === 'email') {
-          setErrorState({...passwordError, emailError: error.message});
-        } else if (error.path === 'password') {
-          setErrorState({passwordError: error.message});
-        }
+        setErrorState(error.message);
       });
     }
   };

@@ -24,7 +24,6 @@ export const SignInScreen = () => {
         value={credentials.email}
         onChangeText={text => setCredentials({...credentials, email: text})}
       />
-      <Text style={{color: 'red'}}>{errorState.emailError}</Text>
       <TextInput
         style={styles.input}
         placeholder="Password"
@@ -32,6 +31,7 @@ export const SignInScreen = () => {
         value={credentials.password}
         onChangeText={text => setCredentials({...credentials, password: text})}
       />
+      <Text style={{color: 'red'}}>{errorState}</Text>
       <Button onPress={signIn} title="Sign In" />
     </View>
   );
