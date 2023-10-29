@@ -10,7 +10,7 @@ export interface GetCompany {
   id: string;
   name: string;
   description: string;
-  coverImageUrl: string = '';
+  coverImageUrl: string;
   logoUrl: string;
   investmentRaised: number;
   investmentSought: number;

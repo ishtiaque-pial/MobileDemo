@@ -1,11 +1,12 @@
 import React from 'react';
-import {ActivityIndicator, Button, TextInput, View} from 'react-native';
+import {ActivityIndicator, Button, Text, TextInput, View} from 'react-native';
 import useLoginController from '../../viewController/useLoginController';
 
 import {styles} from './styles';
 
 export const SignInScreen = () => {
-  const {loading, signIn, credentials, setCredentials} = useLoginController();
+  const {loading, signIn, credentials, setCredentials, errorState} =
+    useLoginController();
 
   if (loading) {
     return (
@@ -30,6 +31,7 @@ export const SignInScreen = () => {
         value={credentials.password}
         onChangeText={text => setCredentials({...credentials, password: text})}
       />
+      <Text style={styles.errorText}>{errorState}</Text>
       <Button onPress={signIn} title="Sign In" />
     </View>
   );
