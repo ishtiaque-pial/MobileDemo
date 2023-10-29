@@ -12,6 +12,6 @@ Before you begin, ensure you have met the following requirements:
 ### Installation
 
 - `git clone https://github.com/ishtiaque-pial/MobileDemo.git`
-- `cd MobileDemo
+- `cd MobileDemo`
 - `npx pod-install` for (iOS)
 - `yarn ios` or `yarn android`
