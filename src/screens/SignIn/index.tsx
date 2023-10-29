@@ -31,7 +31,7 @@ export const SignInScreen = () => {
         value={credentials.password}
         onChangeText={text => setCredentials({...credentials, password: text})}
       />
-      <Text style={{color: 'red'}}>{errorState}</Text>
+      <Text style={styles.errorText}>{errorState}</Text>
       <Button onPress={signIn} title="Sign In" />
     </View>
   );
