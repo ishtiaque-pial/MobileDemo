@@ -7,7 +7,9 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "test:e2e:build:ios": "detox build --configuration ios.sim.debug",
+    "test:e2e:run:ios": "detox test --configuration ios.sim.debug --cleanup"
   },
   "dependencies": {
     "@apollo/client": "^3.8.6",
