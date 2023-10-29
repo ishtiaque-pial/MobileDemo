@@ -17,11 +17,11 @@ const useCompanyDataController = param => {
 
   useEffect(() => {
     dispatch(fetchLoading());
-    const signOut = async () => {
+    const callGraphql = async () => {
       try {
         const authToken = await retrieveData('token');
         const variables = {
-          id: param,
+          id: param?.id,
         };
         const requestHeaders = {
           'x-api-key': authToken ? authToken : '',
@@ -37,7 +37,7 @@ const useCompanyDataController = param => {
         dispatch(fetchError(error.message));
       }
     };
-    signOut();
+    callGraphql();
   }, [param, dispatch]);
 
   return {

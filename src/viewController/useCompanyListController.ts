@@ -19,7 +19,7 @@ const useCompanyListController = () => {
   }, [dispatch]);
 
   const handleItemPress = async (item: Company) => {
-    navigation.navigate('CompanyDetails', item.id);
+    navigation.navigate('CompanyDetails', {id: item.id});
   };
 
   const signOut = async () => {

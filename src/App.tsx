@@ -14,6 +14,17 @@ import store, {persistor} from './store/store';
 
 const HomeStack = createNativeStackNavigator();
 const LoginStack = createNativeStackNavigator();
+const linking = {
+  prefixes: ['seedrsdemo://'],
+  config: {
+    initialRouteName: 'CompaniesList',
+    screens: {
+      SignIn: 'SignIn',
+      CompaniesList: 'CompaniesList',
+      CompanyDetails: 'CompanyDetails/:id',
+    },
+  },
+};
 
 export const App = () => {
   return (
@@ -46,7 +57,7 @@ const AppWrapper = () => {
 
   return (
     <ApolloProvider client={client}>
-      <NavigationContainer>
+      <NavigationContainer linking={linking}>
         {isLoggedIn ? (
           <HomeStack.Navigator>
             <HomeStack.Screen
@@ -54,6 +65,7 @@ const AppWrapper = () => {
               component={CompaniesListScreen}
               options={{
                 title: 'Companies',
+                headerBackTitle: '',
               }}
             />
             <HomeStack.Screen
@@ -61,6 +73,7 @@ const AppWrapper = () => {
               component={CompanyDetailsScreen}
               options={{
                 title: 'Company Details',
+                headerBackTitleVisible: false,
               }}
             />
           </HomeStack.Navigator>

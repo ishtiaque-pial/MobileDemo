@@ -24,6 +24,7 @@ const companyDataSlice = createSlice({
     },
     fetchLoading: state => {
       state.loading = true;
+      state.errorData = null;
     },
     fetchError: (state, action) => {
       state.errorData = action.payload;

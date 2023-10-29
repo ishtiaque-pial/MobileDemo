@@ -8,11 +8,7 @@ export const storeData = async (key: string, value: string) => {
 
 export const removeData = async (key: string) => {
   try {
-    const result1 = await AsyncStorage.getItem(key);
-    console.log('gfghfhg', result1);
     await AsyncStorage.removeItem(key);
-    const result2 = await AsyncStorage.getItem(key);
-    console.log('gfghfhg', result2);
   } catch (e) {}
 };
 
