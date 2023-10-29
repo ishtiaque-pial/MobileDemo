@@ -11,7 +11,7 @@ api.interceptors.request.use(
     if (authToken) {
       config.headers['x-api-key'] = authToken;
     }
-    console.log('API Request:', config);
+    //console.log('API Request:', config);
     return config;
   },
   error => {
@@ -21,7 +21,7 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   response => {
-    console.log('API Response:', response.data);
+    // console.log('API Response:', response.data);
     return response;
   },
   error => {

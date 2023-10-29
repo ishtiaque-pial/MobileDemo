@@ -12,7 +12,8 @@ import {retrieveData} from './storage/storage';
 import {login, selectAuth} from './store/slices/authSlice';
 import store, {persistor} from './store/store';
 
-const Stack = createNativeStackNavigator();
+const HomeStack = createNativeStackNavigator();
+const LoginStack = createNativeStackNavigator();
 
 export const App = () => {
   return (
@@ -46,28 +47,32 @@ const AppWrapper = () => {
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
-        <Stack.Navigator
-          {...{initialRouteName: isLoggedIn ? 'CompaniesList' : 'SignIn'}}>
-          <Stack.Screen
-            name="SignIn"
-            component={SignInScreen}
-            options={{title: 'Sign In'}}
-          />
-          <Stack.Screen
-            name="CompaniesList"
-            component={CompaniesListScreen}
-            options={{
-              title: 'Companies',
-            }}
-          />
-          <Stack.Screen
-            name="CompanyDetails"
-            component={CompanyDetailsScreen}
-            options={{
-              title: 'Company Details',
-            }}
-          />
-        </Stack.Navigator>
+        {isLoggedIn ? (
+          <HomeStack.Navigator>
+            <HomeStack.Screen
+              name="CompaniesList"
+              component={CompaniesListScreen}
+              options={{
+                title: 'Companies',
+              }}
+            />
+            <HomeStack.Screen
+              name="CompanyDetails"
+              component={CompanyDetailsScreen}
+              options={{
+                title: 'Company Details',
+              }}
+            />
+          </HomeStack.Navigator>
+        ) : (
+          <LoginStack.Navigator>
+            <LoginStack.Screen
+              name="SignIn"
+              component={SignInScreen}
+              options={{title: 'Sign In'}}
+            />
+          </LoginStack.Navigator>
+        )}
       </NavigationContainer>
     </ApolloProvider>
   );

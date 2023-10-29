@@ -28,6 +28,9 @@ const companyDataSlice = createSlice({
       state.errorData = action.payload;
       state.loading = false;
     },
+    PURGE: () => {
+      return initialState;
+    },
   },
 });
 

@@ -19,7 +19,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  whitelist: ['companies', 'companyData'],
+  whitelist: ['companies', 'companyData', 'auth'],
 };
 
 const rootReducer = combineReducers({
@@ -41,6 +41,10 @@ const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+export const clearPersistedState = () => {
+  persistor.purge();
+};
 
 /*const store = configureStore({
   reducer: {
