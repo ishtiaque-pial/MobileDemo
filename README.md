@@ -18,6 +18,8 @@ Before you begin, ensure you have met the following requirements:
 
 ### Testing
 
+- [Detox Environment Setup](https://wix.github.io/Detox/docs/introduction/getting-started/) on your development machine.
+
 For e2e testing detox has been used. To test it run follwoing command for iPhone 15 Simulator:
 
 - `test:e2e:build:ios`
