@@ -32,7 +32,6 @@ const useCompanyDataController = param => {
           variables,
           requestHeaders,
         );
-
         dispatch(fetchData(data.getCompany));
       } catch (error: any) {
         dispatch(fetchError(error.message));

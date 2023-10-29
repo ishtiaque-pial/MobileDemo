@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import api from '../../api/api';
+import {storeData} from '../../storage/storage';
 
 interface AuthState {
   token: string | null;
@@ -20,6 +21,7 @@ export const loginAsync = createAsyncThunk(
   async (credentials: {email: string; password: string}) => {
     try {
       const response = await api.post('/login', credentials);
+      storeData('token', response.data.token);
       return response.data;
     } catch (error) {
       throw error;

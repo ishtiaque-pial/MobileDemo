@@ -1,5 +1,4 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {PURGE} from 'redux-persist';
 import api from '../../api/api';
 import {Company} from '../../types/companyListType';
 
@@ -46,9 +45,6 @@ const companySlice = createSlice({
       .addCase(companyListAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || 'An error occurred';
-      })
-      .addCase(PURGE, () => {
-        return initialState;
       });
   },
 });

@@ -20,6 +20,7 @@ const companyDataSlice = createSlice({
     fetchData: (state, action) => {
       state.companyData = action.payload;
       state.loading = false;
+      state.errorData = null;
     },
     fetchLoading: state => {
       state.loading = true;
@@ -27,9 +28,6 @@ const companyDataSlice = createSlice({
     fetchError: (state, action) => {
       state.errorData = action.payload;
       state.loading = false;
-    },
-    PURGE: () => {
-      return initialState;
     },
   },
 });
