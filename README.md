@@ -25,4 +25,8 @@ For e2e testing detox has been used. To test it run follwoing command for iPhone
 
 ### Deeplink
 
-To test deeplink, run following command: -`npx uri-scheme open seedrsdemo://CompanyDetails/{companyID} --ios` for iOS -`npx uri-scheme open seedrsdemo://CompanyDetails/{companyID} --android` for Android
+To test deeplink, run following command:
+
+-`npx uri-scheme open seedrsdemo://CompanyDetails/{companyID} --ios` for iOS
+
+-`npx uri-scheme open seedrsdemo://CompanyDetails/{companyID} --android` for Android
