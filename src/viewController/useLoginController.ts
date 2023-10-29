@@ -20,8 +20,8 @@ const useLoginController = () => {
   });
 
   const [credentials, setCredentials] = useState({
-    email: 'shakib.alhasan@seedrs.com',
-    password: 'password',
+    email: '',
+    password: '',
   });
 
   const signIn = async () => {
