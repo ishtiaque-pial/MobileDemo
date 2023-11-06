@@ -8,8 +8,8 @@ import client from './api/apolloClient';
 import {CompaniesListScreen} from './screens/CompaniesList';
 import {CompanyDetailsScreen} from './screens/CompanyDetails';
 import {SignInScreen} from './screens/SignIn';
+import store, {persistor} from './store';
 import {selectAuth} from './store/slices/authSlice';
-import store, {persistor} from './store/store';
 
 const HomeStack = createNativeStackNavigator();
 const LoginStack = createNativeStackNavigator();
