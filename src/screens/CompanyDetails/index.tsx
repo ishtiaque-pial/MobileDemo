@@ -1,7 +1,7 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
 import {ActivityIndicator, Image, Text, View} from 'react-native';
-import useCompanyDataController from '../../viewController/useCompanyDataController';
+import {useCompanyDataController} from '../../viewController';
 import {styles} from './styles';
 
 export const CompanyDetailsScreen = ({

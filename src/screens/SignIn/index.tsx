@@ -1,6 +1,6 @@
 import React from 'react';
 import {ActivityIndicator, Button, Text, TextInput, View} from 'react-native';
-import useLoginController from '../../viewController/useLoginController';
+import {useLoginController} from '../../viewController';
 
 import {styles} from './styles';
 

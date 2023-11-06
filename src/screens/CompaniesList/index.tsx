@@ -1,6 +1,6 @@
 import React from 'react';
 import {ActivityIndicator, Button, FlatList, Text, View} from 'react-native';
-import useCompanyListController from '../../viewController/useCompanyListController';
+import {useCompanyListController} from '../../viewController';
 import {CompanyListItem} from './component/companyListItem';
 import {styles} from './styles';
 
