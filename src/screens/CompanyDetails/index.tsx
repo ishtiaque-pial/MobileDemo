@@ -21,6 +21,14 @@ export const CompanyDetailsScreen = ({
     );
   }
 
+  if (errorData) {
+    return (
+      <View style={styles.container}>
+        <Text>${errorData}</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <Image

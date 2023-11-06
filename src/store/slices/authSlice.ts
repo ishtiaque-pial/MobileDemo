@@ -21,7 +21,7 @@ export const loginAsync = createAsyncThunk(
   async (credentials: {email: string; password: string}) => {
     try {
       const response = await api.post('/login', credentials);
-      storeData('token', response.data.token);
+      //storeData('token', response.data.token);
       return response.data;
     } catch (error) {
       throw error;
