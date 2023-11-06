@@ -1,5 +1,5 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import api from '../../api/api';
+import {createSlice} from '@reduxjs/toolkit';
+import loginAsync from '../thunk/loginThunk';
 
 interface AuthState {
   token: string | null;
@@ -14,19 +14,6 @@ const initialState: AuthState = {
   error: null,
   isLoggedIn: false,
 };
-
-export const loginAsync = createAsyncThunk(
-  'auth/login',
-  async (credentials: {email: string; password: string}) => {
-    try {
-      const response = await api.post('/login', credentials);
-      //storeData('token', response.data.token);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  },
-);
 
 const authSlice = createSlice({
   name: 'auth',
