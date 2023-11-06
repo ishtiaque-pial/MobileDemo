@@ -32,7 +32,7 @@ export const CompaniesListScreen = () => {
           <CompanyListItem item={item} onPress={() => handleItemPress(item)} />
         )}
       />
-      <Button onPress={signOut} title="Signout" />
+      <Button testID="sign_out_button" onPress={signOut} title="Signout" />
     </View>
   );
 };
