@@ -1,4 +1,5 @@
-import {gql} from 'graphql-request';
+import {gql, GraphQLClient} from 'graphql-request';
+import store from '../store';
 
 export const GET_COMAPNAY = gql`
   query GetCompany($id: String!) {
@@ -27,5 +28,12 @@ export const GET_COMAPNAY = gql`
     }
   }
 `;
-export const endpoint =
-  'https://zgzjtmqrfng43iyc3slad3dfyi.appsync-api.eu-west-1.amazonaws.com/graphql';
+
+const token = store.getState().auth.token;
+export const client = new GraphQLClient(
+  'https://zgzjtmqrfng43iyc3slad3dfyi.appsync-api.eu-west-1.amazonaws.com/graphql',
+);
+
+client.setHeaders({
+  'x-api-key': token ? token : '',
+});

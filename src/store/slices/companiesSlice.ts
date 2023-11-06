@@ -1,6 +1,6 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import api from '../../api/api';
+import {createSlice} from '@reduxjs/toolkit';
 import {Company} from '../../types/companyListType';
+import companyListAsync from '../thunk/companyListThunk';
 
 interface CompaniesListState {
   companies: Array<Company>;
@@ -13,18 +13,6 @@ const initialState: CompaniesListState = {
   loading: false,
   error: null,
 };
-
-export const companyListAsync = createAsyncThunk(
-  'company/CompanyList',
-  async () => {
-    try {
-      const response = await api.get('/companies');
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  },
-);
 
 const companySlice = createSlice({
   name: 'companies',

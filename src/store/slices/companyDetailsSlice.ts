@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {GetCompany} from '../../types/companyDetails';
+import companyDetailsAsync from '../thunk/companyDetailsThunk';
 
 interface CompanyDataState {
   companyData: GetCompany | null;
@@ -16,24 +17,27 @@ const initialState: CompanyDataState = {
 const companyDataSlice = createSlice({
   name: 'companyData',
   initialState,
-  reducers: {
-    fetchData: (state, action) => {
-      state.companyData = action.payload;
-      state.loading = false;
-      state.errorData = null;
-    },
-    fetchLoading: state => {
-      state.loading = true;
-      state.errorData = null;
-    },
-    fetchError: (state, action) => {
-      state.errorData = action.payload;
-      state.loading = false;
-    },
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      .addCase(companyDetailsAsync.pending, state => {
+        state.loading = true;
+        state.errorData = null;
+      })
+      .addCase(companyDetailsAsync.fulfilled, (state, action) => {
+        state.companyData = action.payload;
+        state.loading = false;
+        state.errorData = null;
+      })
+
+      .addCase(companyDetailsAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.errorData = action.error.message || 'An error occurred';
+      });
   },
 });
 
 export const selectCompaniesData = (state: {companyData: CompanyDataState}) =>
   state.companyData;
-export const {fetchData, fetchError, fetchLoading} = companyDataSlice.actions;
+//export const {fetchData, fetchError, fetchLoading} = companyDataSlice.actions;
 export default companyDataSlice.reducer;
