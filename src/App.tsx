@@ -1,10 +1,8 @@
-import {ApolloProvider} from '@apollo/client';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {Provider, useSelector} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
-import client from './api/apolloClient';
 import {CompaniesListScreen} from './screens/CompaniesList';
 import {CompanyDetailsScreen} from './screens/CompanyDetails';
 import {SignInScreen} from './screens/SignIn';
@@ -39,37 +37,35 @@ const AppWrapper = () => {
   const {isLoggedIn} = useSelector(selectAuth);
 
   return (
-    <ApolloProvider client={client}>
-      <NavigationContainer linking={linking}>
-        {isLoggedIn ? (
-          <HomeStack.Navigator>
-            <HomeStack.Screen
-              name="CompaniesList"
-              component={CompaniesListScreen}
-              options={{
-                title: 'Companies',
-                headerBackTitle: '',
-              }}
-            />
-            <HomeStack.Screen
-              name="CompanyDetails"
-              component={CompanyDetailsScreen}
-              options={{
-                title: 'Company Details',
-                headerBackTitleVisible: false,
-              }}
-            />
-          </HomeStack.Navigator>
-        ) : (
-          <LoginStack.Navigator>
-            <LoginStack.Screen
-              name="SignIn"
-              component={SignInScreen}
-              options={{title: 'Sign In'}}
-            />
-          </LoginStack.Navigator>
-        )}
-      </NavigationContainer>
-    </ApolloProvider>
+    <NavigationContainer linking={linking}>
+      {isLoggedIn ? (
+        <HomeStack.Navigator>
+          <HomeStack.Screen
+            name="CompaniesList"
+            component={CompaniesListScreen}
+            options={{
+              title: 'Companies',
+              headerBackTitle: '',
+            }}
+          />
+          <HomeStack.Screen
+            name="CompanyDetails"
+            component={CompanyDetailsScreen}
+            options={{
+              title: 'Company Details',
+              headerBackTitleVisible: false,
+            }}
+          />
+        </HomeStack.Navigator>
+      ) : (
+        <LoginStack.Navigator>
+          <LoginStack.Screen
+            name="SignIn"
+            component={SignInScreen}
+            options={{title: 'Sign In'}}
+          />
+        </LoginStack.Navigator>
+      )}
+    </NavigationContainer>
   );
 };
