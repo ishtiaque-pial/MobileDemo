@@ -1,19 +1,4 @@
-import {gql, RequestMiddleware} from 'graphql-request';
-import {retrieveData} from '../storage/storage';
-
-const getAccessToken = async () => {
-  const token = await retrieveData('token');
-  return token ? token : '';
-};
-export const requestMiddleware: RequestMiddleware = async request => {
-  return {
-    ...request,
-    headers: {
-      ...request.headers,
-      'x-api-key': await getAccessToken(),
-    },
-  };
-};
+import {gql} from 'graphql-request';
 
 export const GET_COMAPNAY = gql`
   query GetCompany($id: String!) {
