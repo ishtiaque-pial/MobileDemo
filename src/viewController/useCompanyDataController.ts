@@ -2,7 +2,7 @@ import request from 'graphql-request';
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {GET_COMAPNAY, endpoint} from '../api/graphql';
-import {retrieveData} from '../storage/storage';
+import {selectAuth} from '../store/slices/authSlice';
 import {
   fetchData,
   fetchError,
@@ -14,17 +14,17 @@ import {Data} from '../types/companyDetails';
 const useCompanyDataController = param => {
   const dispatch = useDispatch<any>();
   const {loading, companyData, errorData} = useSelector(selectCompaniesData);
+  const {token} = useSelector(selectAuth);
 
   useEffect(() => {
     dispatch(fetchLoading());
     const callGraphql = async () => {
       try {
-        const authToken = await retrieveData('token');
         const variables = {
           id: param?.id,
         };
         const requestHeaders = {
-          'x-api-key': authToken ? authToken : '',
+          'x-api-key': token ? token : '',
         };
         const data = await request<Data>(
           endpoint,
@@ -38,7 +38,7 @@ const useCompanyDataController = param => {
       }
     };
     callGraphql();
-  }, [param, dispatch]);
+  }, [param, token, dispatch]);
 
   return {
     loading,

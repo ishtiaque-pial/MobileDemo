@@ -1,11 +1,9 @@
-import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import * as Yup from 'yup';
 import {loginAsync, selectAuth} from '../store/slices/authSlice';
 
 const useLoginController = () => {
-  const navigation = useNavigation();
   const dispatch = useDispatch<any>();
   const {loading, token} = useSelector(selectAuth);
   const [errorState, setErrorState] = useState('');
@@ -20,8 +18,8 @@ const useLoginController = () => {
   });
 
   const [credentials, setCredentials] = useState({
-    email: '',
-    password: '',
+    email: 'shakib.alhasan@seedrs.com',
+    password: 'password',
   });
 
   const signIn = async () => {
