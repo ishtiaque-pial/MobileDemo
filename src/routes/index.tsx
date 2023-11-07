@@ -1,4 +1,4 @@
-import {NavigationContainer} from '@react-navigation/native';
+import {LinkingOptions, NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {useSelector} from 'react-redux';
@@ -6,10 +6,12 @@ import {CompaniesListScreen} from '../screens/CompaniesList';
 import {CompanyDetailsScreen} from '../screens/CompanyDetails';
 import {SignInScreen} from '../screens/SignIn';
 import {selectAuth} from '../store/slices/authSlice';
+import {RootStackParamList} from './routesType';
+export * from './routesType';
 
 const HomeStack = createNativeStackNavigator();
 const LoginStack = createNativeStackNavigator();
-const linking = {
+const linking: LinkingOptions<RootStackParamList> = {
   prefixes: ['seedrsdemo://'],
   config: {
     initialRouteName: 'CompaniesList',

@@ -4,7 +4,7 @@ import {selectAuth} from '../store/slices/authSlice';
 import {selectCompaniesData} from '../store/slices/companyDetailsSlice';
 import companyDetailsAsync from '../store/thunk/companyDetailsThunk';
 
-const useCompanyDataController = param => {
+const useCompanyDataController = (param: {id: string}) => {
   interface CompanyCredentials {
     company_id: string;
     token: string;
@@ -15,7 +15,7 @@ const useCompanyDataController = param => {
 
   useEffect(() => {
     const companyCredentials: CompanyCredentials = {
-      company_id: param?.id,
+      company_id: param.id,
       token: token ? token : '',
     };
     dispatch(companyDetailsAsync(companyCredentials));
